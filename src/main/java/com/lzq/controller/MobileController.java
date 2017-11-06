@@ -17,14 +17,14 @@ public class MobileController {
 	MobileService mobileService;
 	
 	@RequestMapping("/findmobile")
-	public String getMobile(Model model,int mobilenum){
+	public String getMobile(Model model,String mobilenum){
 		Mobile mobile = mobileService.getmobile(mobilenum);
 		String msg=null;
 		if(mobile!=null){
 			msg=mobilenum+"\t"+mobile.getMobileArea()+mobile.getMobileType();
 			model.addAttribute("msg", msg);
 		}else{
-			msg=mobile+" "+"�ú��뻹δ��¼";
+			msg=mobile+" "+"该号码未收录";
 			model.addAttribute("msg", msg);
 		}
 		

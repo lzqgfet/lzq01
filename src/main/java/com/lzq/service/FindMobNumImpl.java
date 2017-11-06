@@ -15,15 +15,14 @@ public class FindMobNumImpl implements FindMobNum{
 	@Resource
 	MobileDao mobileDao;
 	@WebMethod
-	public String findnum(int num) {
-		String s = String.valueOf(num);
-		int number = Integer.parseInt(s.substring(0, 7));
+	public String findnum(String num) {
+		String number= num.substring(0, 7);
 		Mobile mobile = mobileDao.getmobile(number);
 		String msg=null;
 		if(mobile!=null){
 			msg=num+"\t"+mobile.getMobileArea()+mobile.getMobileType();
 		}else{
-			msg=num+"�ĺ��뻹δ��¼";
+			msg=num+"改号码未收录";
 		}
 		
 		

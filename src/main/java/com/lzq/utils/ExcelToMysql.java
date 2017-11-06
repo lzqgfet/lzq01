@@ -49,7 +49,7 @@ public class ExcelToMysql {
 						list.add(cell);
 					}
 					//System.out.println(list);
-					int mobilenumber= Integer.parseInt(String.valueOf(list.get(1))) ;
+					String mobilenumber=String.valueOf(list.get(1)) ;
 					String mobilearea=String.valueOf(list.get(2));
 					String mobiletype=String.valueOf(list.get(3));
 					String areacode=String.valueOf(list.get(4));

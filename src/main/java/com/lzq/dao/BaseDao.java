@@ -40,7 +40,7 @@ public class BaseDao {
 	}
 
 	/*
-	 * Êı¾İ¿âÊı¾İÌí¼Óinsert¡¢É¾³ıdelete¡¢ĞŞ¸Äupdate
+	 * æ•°æ®åº“æ•°æ®æ·»åŠ insertã€åˆ é™¤deleteã€ä¿®æ”¹update
 	 */
 	public static int executeUpdate(String sql) {
 		Connection conn = getConnection();
@@ -58,7 +58,7 @@ public class BaseDao {
 	}
 
 	/*
-	 * Êı¾İ¿âÊı¾İ²éÑ¯select
+	 * æ•°æ®åº“æ•°æ®æŸ¥è¯¢select
 	 */
 	public static List<Map<String, Object>> executeQuery(String sql) {
 		Connection conn = getConnection();
@@ -89,7 +89,7 @@ public class BaseDao {
 	}
 
 	/*
-	 * Ö´ĞĞ¶àÌõ²Ù×÷£¨ Ìí¼Óinsert¡¢É¾³ıdelete¡¢ĞŞ¸Äupdate£©
+	 * Ö´æ‰§è¡Œå¤šæ¡æ“ä½œï¼ˆ æ·»åŠ insertã€åˆ é™¤deleteã€ä¿®æ”¹updateï¼‰
 	 */
 	public static int[] executeBatch(List<String> list) {
 		Connection conn = BaseDao.getConnection();

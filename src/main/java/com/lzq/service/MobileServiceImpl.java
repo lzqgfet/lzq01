@@ -11,9 +11,8 @@ public class MobileServiceImpl implements MobileService {
 	@Resource
 	MobileDao mobileDao;
 
-	public Mobile getmobile(int num) {
-		String s = String.valueOf(num);
-		int number = Integer.parseInt(s.substring(0, 7));
+	public Mobile getmobile(String num) {
+		String number = num.substring(0, 7);
 		Mobile mobile = mobileDao.getmobile(number);
 		return mobile;
 	}

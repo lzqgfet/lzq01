@@ -5,7 +5,7 @@
 		<result column="MobileArea" property="mobileArea"/>
 		<result column="MobileType" property="mobileType"/>
 	</resultMap>
-	<select id="getmobile" parameterType="int" resultMap="rt">
+	<select id="getmobile" parameterType="java.lang.String" resultMap="rt">
 		select MobileArea,mobiletype from mobile where mobilenumber=#{num}
 	</select>
 

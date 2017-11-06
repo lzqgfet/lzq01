@@ -23,9 +23,9 @@ public class C3P0Util {
 	public static void close(Connection conn) {
 		if (conn != null) {
 			try {
-				// »Ø¸´Ä¬ÈÏ×´Ì¬
+				// å›å¤é»˜è®¤çŠ¶æ€
 				conn.setAutoCommit(true);
-				// ·Å»Øµ½Á¬½Ó³ØÖĞ
+				// æ”¾å›åˆ°è¿æ¥æ± ä¸­
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();

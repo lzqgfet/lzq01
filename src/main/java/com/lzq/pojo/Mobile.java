@@ -2,7 +2,7 @@ package com.lzq.pojo;
 
 public class Mobile {
 	private int id;
-	private int mobileNumber;
+	private String mobileNumber;
 	private String mobileArea;
 	private String mobileType;
 	private String areaCode;
@@ -16,10 +16,11 @@ public class Mobile {
 	
 	
 	
-	public int getMobileNumber() {
+	
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
-	public void setMobileNumber(int mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 	public String getMobileArea() {
