@@ -12,7 +12,9 @@ public class MobileServiceImpl implements MobileService {
 	MobileDao mobileDao;
 
 	public Mobile getmobile(int num) {
-		Mobile mobile = mobileDao.getmobile(num);
+		String s = String.valueOf(num);
+		int number = Integer.parseInt(s.substring(0, 7));
+		Mobile mobile = mobileDao.getmobile(number);
 		return mobile;
 	}
 
