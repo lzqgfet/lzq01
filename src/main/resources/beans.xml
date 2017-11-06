@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+     	 http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <context:component-scan base-package="com.lzq">
+        <!--防止重复扫描controller注解  -->
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan> 
+    
+    <!-- 数据源管理 -->	 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/mobile"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<!--spring 管理sqlSessionFactory：mybaits的配置文件和数据源  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:MybatisConfig.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 推荐使用批量代理：bean节点id默认是实现接口的首字母小写 -->
+   	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+   	  	<property name="basePackage" value="com.lzq.dao"></property>
+   	  	<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   	</bean>
+	
+	<!-- 事务管理 -->
+	<!-- 平台事务管理器 -->
+ 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 配置事务增强 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+   	  <tx:attributes>
+   	    <tx:method name="find*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
+   	    <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+   	  </tx:attributes>
+   	</tx:advice>
+   	<aop:config>
+   	   <aop:pointcut expression="execution(* com.lzq.service.*.*(..))" id="point"/>
+   	   <aop:advisor advice-ref="txAdvice" pointcut-ref="point"/>
+   	</aop:config>
+   	<!-- CXF服务端发布配置 -->  
+   <import resource="cxf-servlet.xml"/>
+</beans>
